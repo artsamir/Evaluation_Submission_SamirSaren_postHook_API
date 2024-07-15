@@ -1,0 +1,23 @@
+package restAssured;
+
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+
+import static io.restassured.RestAssured.*;
+import io.restassured.response.Response;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+import org.json.simple.JSONObject;
+import org.testng.annotations.Test;
+public class PostHookAPI {
+	
+	
+
+	@Test
+	public void scheduleAHook() {
+		
+		given().when().post()
+	}
+}

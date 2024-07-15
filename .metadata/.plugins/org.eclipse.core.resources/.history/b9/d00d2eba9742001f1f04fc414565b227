@@ -1,0 +1,38 @@
+package restAssured;
+
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+
+import static io.restassured.RestAssured.*;
+import io.restassured.response.Response;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+import org.json.simple.JSONObject;
+import org.testng.annotations.Test;
+public class PostHookAPI {
+	
+	// https://posthook-api.mock.beeceptor.com
+
+	// Schedule a hook
+	@Test(priority = 0)
+	public void scheduleAHook() {
+		
+		given().when().post("https://posthook-api.mock.beeceptor.com/v1/hooks").then().log().all();
+	}
+	
+	// Get a Hook
+	@Test(priority = 1)
+	public void getAHook() {
+		
+		Response id = given().when().get("https://posthook-api.mock.beeceptor.com/v1/hooks").then().statusCode(200)
+				.extract().response();
+		
+		String rep = id.asString();
+		JsonPath jp = new JsonPath(rep);
+		Object hook_id = jp.get("id");
+		System.out.println("The id is : " + hook_id);
+	}
+		
+}
